@@ -1,0 +1,17 @@
+# 開発環境用のDockerfile
+FROM node:20-alpine
+
+WORKDIR /app
+
+# パッケージ情報をコピーして依存関係をインストール
+COPY package.json package-lock.json* ./
+RUN npm install
+
+# ソースコードをコピー
+COPY . .
+
+# 開発用ポートを露出
+EXPOSE 3000
+
+# 開発サーバーを起動
+CMD ["npm", "run", "dev"]
